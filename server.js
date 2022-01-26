@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const api = require('./routes/index.js');
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3003;
 
 const app = express();
 
@@ -23,5 +23,3 @@ app.get('/notes', (req, res) =>
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
-
-module.exports= server;
