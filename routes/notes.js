@@ -1,7 +1,7 @@
 const fb = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
 const { readAndAppend, readFromFile, writeToFile } = require('../Helpers/fsUtils.js');
-// const { response } = require('./index.js');
+
 
 fb.get('/', (req, res) =>
   readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)))
@@ -19,17 +19,8 @@ fb.post('/', (req, res) => {
       id: uuidv4(),
     };
     readAndAppend(newEntry, './db/db.json');
-
-//     const response = {
-//       status: 'success',
-//       body: newEntry,
-//     };
-//     res.json(response);
-//   } else {
-//     res.json('Error in posting note');
-//   }
-  
-}
+    res.json('New Note Added');
+  }
 });
 
 fb.delete('/:id', (req, res) => {
@@ -43,7 +34,8 @@ fb.delete('/:id', (req, res) => {
     arr.splice(indexOF, 1);
     newArr = arr;
     writeToFile('./db/db.json', newArr);
-    }).then(console.log("hello"))
+    res.json('Note Deleted');
+})
 });
 
 module.exports = fb;
