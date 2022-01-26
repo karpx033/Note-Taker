@@ -21,4 +21,8 @@ const readAndAppend = (content, file) => {
   });
 };
 
+// const overwriteFile = (content, file) => {
+
+// }
+
 module.exports = { readFromFile, writeToFile, readAndAppend };
