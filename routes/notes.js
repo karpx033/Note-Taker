@@ -31,20 +31,30 @@ fb.post('/', (req, res) => {
 });
 
 fb.delete('/:id', (req, res) => {
-    console.log("delete button clicked");
-    console.log(req.params.id);
+
 
 const noteID = req.params.id
 readFromFile('./db/db.json').then((data) => {
-
+    var newArr =[];
     var arr = JSON.parse(data);
-       var newData =  arr.splice(arr.findIndex(function(){
-        return noteID;
-    }), 1);;
-    console.log(newData);
-       writeToFile('./db/db.json', newData);
+    console.log("TEST HERE");
+    console.log(arr);
+    console.log(arr.findIndex(function(i){
+        return i.id == noteID;
+    }));
+    var indexOF = arr.findIndex(function(i){
+        return i.id == noteID;
+    });
+    console.log(indexOF);
+    arr.splice(indexOF, 1);
+
+    console.log("TEST RESULTS");
+    console.log(arr);
+    newArr = arr;
+    console.log(newArr);
+    writeToFile('./db/db.json', newArr);
     
-})
+}).then(res.json(response))
 
 })
 
